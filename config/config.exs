@@ -16,3 +16,6 @@ token =
 config :nostrum,
   token: token,
   num_shards: if shards != -1, do: shards, else: :auto
+
+config :catlixir,
+  command: System.get_env("DISCORD_BOT_COMMAND") || ".cat"
