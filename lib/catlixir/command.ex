@@ -22,8 +22,8 @@ defmodule Catlixir.Command do
         # stuff regarding help
         Command.Help.perform(arguments, message)
       "facts" ->
-        # stuff regarding facts
-        Command.Facts.perform(arguments, message)
+        # Show a random cat fact
+        Command.Fact.perform(arguments, message)
       _ ->
         # uncategorized, use help
         alias Nostrum.Api
