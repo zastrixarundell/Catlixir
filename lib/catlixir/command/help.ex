@@ -1,6 +1,5 @@
 defmodule Catlixir.Command.Help do
   @behaviour Catlixir.Command
-  alias Nostrum.Api
 
   @moduledoc """
   Elixir module which corresponds to the `help` command on the bot.
@@ -8,6 +7,8 @@ defmodule Catlixir.Command.Help do
 
   @doc false
   def perform(_arguments, message) do
+    alias Nostrum.Api
+
     Api.create_message(message.channel_id, embed: generate_help_embed())
     :ok
   end

@@ -1,6 +1,5 @@
 defmodule Catlixir.Command.Fact do
   @behaviour Catlixir.Command
-  alias Nostrum.Api
 
   @moduledoc """
   Elixir module which corresponds to the `fact` command on the bot.
@@ -8,6 +7,8 @@ defmodule Catlixir.Command.Fact do
 
   @doc false
   def perform(_arguments, message) do
+    alias Nostrum.Api
+
     case base_fact_url() |> HTTPoison.get() do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         embed =
@@ -25,8 +26,8 @@ defmodule Catlixir.Command.Fact do
       {:error, _error} ->
         message.channel_id
         |> Api.create_message(embed: create_error_embed())
-
     end
+
     :ok
   end
 
