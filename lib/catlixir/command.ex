@@ -21,7 +21,7 @@ defmodule Catlixir.Command do
       "help" ->
         # stuff regarding help
         Command.Help.perform(arguments, message)
-      "facts" ->
+      "fact" ->
         # Show a random cat fact
         Command.Fact.perform(arguments, message)
       _ ->
