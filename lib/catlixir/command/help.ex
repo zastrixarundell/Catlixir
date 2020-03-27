@@ -6,8 +6,26 @@ defmodule Catlixir.Command.Help do
   Elixir module which corresponds to the `help` command on the bot.
   """
 
+  @doc false
   def perform(_arguments, message) do
-    Api.create_message(message.channel_id, "So, why did you write help?")
+    Api.create_message(message.channel_id, embed: generate_help_embed())
     :ok
+  end
+
+  @command Application.get_env(:catlixir, :command)
+
+  @doc """
+  Generates a nostrum embed which contains all of the commands which
+  this bot has.
+  """
+  def generate_help_embed do
+    import Nostrum.Struct.Embed
+
+    me = Nostrum.Cache.Me.get()
+
+    %Nostrum.Struct.Embed{}
+    |> put_title("Co-meow-nds for: #{me.username}!")
+    |> put_field("#{@command} help", "Show this menu!")
+    |> put_field("#{@command} fact", "Get a random fact about us (cats)!")
   end
 end

@@ -23,7 +23,7 @@ defmodule Catlixir.Consumer do
   """
   def handle_event({:MESSAGE_CREATE, message, _ws_state}) do
     if (!message.author.bot and is_catlixir_command? message), do:
-      Catlixir.Command.handle_message(@command, message)
+      Catlixir.Command.handle_message(message)
   end
 
   @doc """
