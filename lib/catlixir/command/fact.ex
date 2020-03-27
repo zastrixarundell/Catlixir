@@ -14,18 +14,18 @@ defmodule Catlixir.Command.Fact do
         embed =
           body
           |> Jason.decode!()
-          |> create_fact_embed
+          |> create_fact_embed(message)
 
         message.channel_id
         |> Api.create_message(embed: embed)
 
       {:ok, %HTTPoison.Response{status_code: 404}} ->
         message.channel_id
-        |> Api.create_message(embed: create_api_error_embed())
+        |> Api.create_message(embed: create_api_error_embed(message))
 
       {:error, _error} ->
         message.channel_id
-        |> Api.create_message(embed: create_error_embed())
+        |> Api.create_message(embed: create_error_embed(message))
     end
 
     :ok
@@ -48,36 +48,38 @@ defmodule Catlixir.Command.Fact do
   @doc """
   Generates a nostrum embed for an event if the api has an error 404.
   """
-  @spec create_api_error_embed :: Nostrum.Struct.Embed.t()
-  def create_api_error_embed do
+  def create_api_error_embed(message) do
     import Nostrum.Struct.Embed
+    import Catlixir.Helper
 
     %Nostrum.Struct.Embed{}
     |> put_title("Oh noes! The page wasn't found!")
     |> put_description("The page from where I get the facts is down! This is a cat-astrophe!")
     |> put_image("https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/oh_noes.jpg")
+    |> put_color_on_embed(message)
   end
 
   @doc """
   Generates a nostrum embed for an event if the api has an error
   which is not 404.
   """
-  @spec create_error_embed :: Nostrum.Struct.Embed.t()
-  def create_error_embed do
+  def create_error_embed(message) do
     import Nostrum.Struct.Embed
+    import Catlixir.Helper
 
     %Nostrum.Struct.Embed{}
     |> put_title("Oh noes! The an error meow-curred!")
     |> put_description("Something went wrong hooman!")
     |> put_image("https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/oh_noes.jpg")
+    |> put_color_on_embed(message)
   end
 
   @doc """
   Generates a nostrum embed containing the random generated fact.
   """
-  @spec create_fact_embed(nil | maybe_improper_list | map) :: Nostrum.Struct.Embed.t()
-  def create_fact_embed(fact_map) do
+  def create_fact_embed(fact_map, message) do
     import Nostrum.Struct.Embed
+    import Catlixir.Helper
 
     fact = if String.ends_with?(fact_map["fact"], [".", "!", "?"]),
       do: fact_map["fact"], else: "#{fact_map["fact"]}."
@@ -86,6 +88,7 @@ defmodule Catlixir.Command.Fact do
     |> put_title("Random cat fact:")
     |> put_description(fact)
     |> put_image("https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/laptop.jpg")
+    |> put_color_on_embed(message)
   end
 
 end
