@@ -55,7 +55,7 @@ defmodule Catlixir.Command.Fact do
     %Nostrum.Struct.Embed{}
     |> put_title("Random cat fact:")
     |> put_description(fact_map["fact"])
-    |> put_image("https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/interesting.jpg")
+    |> put_image("https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/laptop.jpg")
   end
 
 end
