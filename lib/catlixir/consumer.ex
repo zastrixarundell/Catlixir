@@ -14,6 +14,8 @@ defmodule Catlixir.Consumer do
     Consumer.start_link(__MODULE__)
   end
 
+  @command Application.get_env(:catlixir, :command)
+
   @doc """
   Handles the `:MESSAGE_CREATE` event. If it is
   seen as a command crated from an user, it will
@@ -24,7 +26,7 @@ defmodule Catlixir.Consumer do
       start =
         message.content
         |> String.downcase()
-        |> String.starts_with?(".cat")
+        |> String.starts_with?(@command)
 
       if start, do:
         Catlixir.Command.handle_message(message)
