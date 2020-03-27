@@ -7,10 +7,15 @@ defmodule Catlixir.Command do
   Handles all of the message and sends them to the
   required command modules
   """
-  def handle_message(message) do
-
+  def handle_message(command_prefix, message) do
     alias Nostrum.Api
-    Api.create_message!(message.channel_id, "Cat command spotted!")
+
+    content =
+      message.content
+      |> String.replace_prefix(command_prefix, " ")
+      |> String.trim_leading()
+
+    Api.create_message!(message.channel_id, "So, why did you write #{content}?")
   end
 
 end
