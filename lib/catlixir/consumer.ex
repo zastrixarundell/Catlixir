@@ -27,6 +27,14 @@ defmodule Catlixir.Consumer do
   end
 
   @doc """
+  Listen to ready event and update the status.
+  """
+  def handle_event({:READY, _, _}) do
+    Nostrum.Api.update_status("", "you type #{@command}", 3)
+  end
+
+
+  @doc """
   This only exists so that when an uncaptured event is
   created the bot won't create an error!
   """
