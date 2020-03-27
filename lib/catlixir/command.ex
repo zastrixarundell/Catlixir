@@ -27,8 +27,10 @@ defmodule Catlixir.Command do
       _ ->
         # uncategorized, use help
         alias Nostrum.Api
-        Api.create_message!(message.channel_id, "Nani!")
+        Api.create_message(message.channel_id, "Nani!")
     end
+
+    :ok
   end
 
   @doc """

@@ -3,7 +3,7 @@ defmodule Catlixir.Command.Help do
   alias Nostrum.Api
 
   def perform(_arguments, message) do
-    Api.create_message!(message.channel_id, "So, why did you write help?")
+    Api.create_message(message.channel_id, "So, why did you write help?")
     :ok
   end
 end
