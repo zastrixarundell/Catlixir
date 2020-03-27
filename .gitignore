@@ -22,3 +22,5 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 catlixir-*.tar
 
+# Folder creating from Elixir VScode plugin
+.elixir_ls
