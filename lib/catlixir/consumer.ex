@@ -22,18 +22,22 @@ defmodule Catlixir.Consumer do
   parse it to the command module.
   """
   def handle_event({:MESSAGE_CREATE, message, _ws_state}) do
-    if !message.author.bot do
-      start =
-        message.content
-        |> String.downcase()
-        |> String.starts_with?(@command)
-
-      if start, do:
-        Catlixir.Command.handle_message(message)
-    end
+    if !message.author.bot && is_catlixir_command? message, do:
+      Catlixir.Command.handle_message(message)
   end
 
+  @doc """
+  This only exists so that when an uncaptured event is
+  created the bot won't create an error!
+  """
   def handle_event(_event) do
     :noop
+  end
+
+  @spec is_catlixir_command?(any()) :: boolean()
+  defp is_catlixir_command?(message) do
+    message.content
+      |> String.downcase()
+      |> String.starts_with?(@command)
   end
 end
