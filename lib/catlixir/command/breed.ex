@@ -26,10 +26,19 @@ defmodule Catlixir.Command.Breed do
             body
             |> Jason.decode!()
 
-          IO.inspect json
+          if Enum.empty?(results) do
+            Api.create_message(message.channel_id, embed: create_empty_embed(message))
+          else
+            results =
+              Enum.chunk_every(results, 5)
+              |> Enum.at(0)
 
-          #message.channel_id
-          #|> Api.create_message(embed: embed)
+              results
+              |> results_to_embeds(message)
+              |> Enum.map(fn embed ->
+                Api.create_message(message.channel_id, embed: embed)
+              end)
+          end
 
         {:ok, %HTTPoison.Response{status_code: 404}} ->
           message.channel_id
@@ -56,6 +65,61 @@ defmodule Catlixir.Command.Breed do
       |> URI.encode_www_form()
 
     "https://api.thecatapi.com/v1/breeds/search?q=#{breed}"
+  end
+
+  @doc """
+  Transforms the results into embeds and andds colors.
+
+  The inputs are an array of Map elements from the API and
+  the message in which this was created.
+  """
+  def results_to_embeds(results, message) do
+    for result <- results do
+      import Nostrum.Struct.Embed
+
+      {name, result} = Map.pop(result, "name")
+      {description, result} = Map.pop(result, "description")
+      {wiki, result} = Map.pop(result, "wikipedia_url")
+
+      embed =
+        %Nostrum.Struct.Embed{}
+        |> put_title("Info about #{name}:")
+        |> put_description(description)
+        |> put_url(wiki)
+
+      permit = ["health_issues", "alt_names", "life_span"]
+
+      result =
+        Enum.reduce result, embed, fn {key, value}, buffer ->
+          if !is_map(value) and !is_nil(value) and !String.equivalent?("#{value}", "")
+            and Enum.member?(permit, key) do
+
+            key =
+              key
+              |> String.capitalize()
+              |> String.replace("_", " ")
+
+            put_field(buffer, "#{key}", value, true)
+          else
+            buffer
+          end
+        end
+
+      result |> put_color_on_embed(message)
+    end
+  end
+
+  @doc """
+  Creates and embed struct for when a breed could not be found.
+  """
+  def create_empty_embed(message) do
+    import Nostrum.Struct.Embed
+
+    %Nostrum.Struct.Embed{}
+    |> put_title("Oh noes! An error meow-curred!")
+    |> put_description("I couldn't find that breed!")
+    |> put_image("https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/oh_noes.jpg")
+    |> put_color_on_embed(message)
   end
 
 end
