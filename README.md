@@ -49,7 +49,6 @@ config :nostrum,
   num_shards: System.get_env("DISCORD_BOT_SHARDS") |> String.to_integer()
 
 # Configuration for Catlixir
-
 config :catlixir,
   command: System.get_env("DISCORD_BOT_COMMAND") || ".cat",
   the_cat_api_key: System.get_env("THE_CAT_API_KEY"),
