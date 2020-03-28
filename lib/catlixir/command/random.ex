@@ -8,13 +8,7 @@ defmodule Catlixir.Command.Random do
   def perform(_arguments, message) do
     alias Nostrum.Api
 
-    embed =
-      if Enum.random([true, false]), do:
-          create_random_pic_embed(message),
-        else:
-          create_random_pic_embed(message)
-
-    Api.create_message(message.channel_id, embed: embed)
+    Api.create_message(message.channel_id, embed: create_random_pic_embed(message))
     :ok
   end
 
@@ -29,16 +23,6 @@ defmodule Catlixir.Command.Random do
     %Nostrum.Struct.Embed{}
     |> put_title("Random cat image!")
     |> put_image("https://cataas.com/cat?#{generate_random_unique_param()}")
-    |> put_color_on_embed(message)
-  end
-
-  @doc """
-  Sends a random gif embed from he CATAAS API.
-  """
-  def send_random_gif_embed(message) do
-    %Nostrum.Struct.Embed{}
-    |> put_title("Random cat image!")
-    |> put_image("https://cataas.com/cat/gif?#{generate_random_unique_param()}")
     |> put_color_on_embed(message)
   end
 
