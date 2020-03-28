@@ -18,7 +18,14 @@ defmodule Catlixir.Command do
       |> String.split(" ")
       |> List.pop_at(0)
 
-    alias Catlixir.Command.{Help, Fact, Breed, Random, Invite}
+    alias Catlixir.Command.{
+      Help,
+      Fact,
+      Breed,
+      Random,
+      Invite,
+      Support
+    }
 
     case command do
       "help" ->
@@ -35,6 +42,9 @@ defmodule Catlixir.Command do
 
       "invite" ->
         Invite.perform(arguments, message)
+
+      "support" ->
+        Support.perform(arguments, message)
 
       _ ->
         Help.perform(arguments, message)

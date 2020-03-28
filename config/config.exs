@@ -30,4 +30,5 @@ the_cat_api_key =
 config :catlixir,
   command: System.get_env("DISCORD_BOT_COMMAND") || ".cat",
   the_cat_api_key: the_cat_api_key,
-  invite_url: System.get_env("DISCORD_BOT_INVITE_URL")
+  invite_url: System.get_env("DISCORD_BOT_INVITE_URL"),
+  support_url: System.get_env("DISCORD_BOT_SUPPORT")
