@@ -46,6 +46,8 @@ defmodule Catlixir.Consumer do
   defp is_catlixir_command?(message) do
     message.content
       |> String.downcase()
-      |> String.starts_with?(@command)
+      |> String.split(" ")
+      |> Enum.at(0)
+      |> String.equivalent?(@command)
   end
 end
