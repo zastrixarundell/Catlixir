@@ -42,8 +42,10 @@ defmodule Catlixir.Consumer do
     :noop
   end
 
-  @spec is_catlixir_command?(any()) :: boolean()
-  defp is_catlixir_command?(message) do
+  @doc """
+  Check whether a message is an Catlixir command.
+  """
+  def is_catlixir_command?(message) do
     message.content
       |> String.downcase()
       |> String.split(" ")
