@@ -5,6 +5,8 @@ defmodule Catlixir.Command.Fact do
   Elixir module which corresponds to the `fact` command on the bot.
   """
 
+  import Catlixir.Helper
+
   @doc false
   def perform(_arguments, message) do
     alias Nostrum.Api
@@ -43,35 +45,6 @@ defmodule Catlixir.Command.Fact do
   @spec base_fact_url :: String.t()
   def base_fact_url do
     "https://catfact.ninja/fact"
-  end
-
-  @doc """
-  Generates a nostrum embed for an event if the api has an error 404.
-  """
-  def create_api_error_embed(message) do
-    import Nostrum.Struct.Embed
-    import Catlixir.Helper
-
-    %Nostrum.Struct.Embed{}
-    |> put_title("Oh noes! The page wasn't found!")
-    |> put_description("The page from where I get the facts is down! This is a cat-astrophe!")
-    |> put_image("https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/oh_noes.jpg")
-    |> put_color_on_embed(message)
-  end
-
-  @doc """
-  Generates a nostrum embed for an event if the api has an error
-  which is not 404.
-  """
-  def create_error_embed(message) do
-    import Nostrum.Struct.Embed
-    import Catlixir.Helper
-
-    %Nostrum.Struct.Embed{}
-    |> put_title("Oh noes! The an error meow-curred!")
-    |> put_description("Something went wrong hooman!")
-    |> put_image("https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/oh_noes.jpg")
-    |> put_color_on_embed(message)
   end
 
   @doc """
