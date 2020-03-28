@@ -10,11 +10,11 @@ This bot has multiple commands mostly regarding cats. Currently there are 6 comm
 |Name|Usage|Description|
 |----|-----|-----------|
 |A cat fact|.cat fact|Show a random fact about cats.|
-|Breed info|.cat breed york chocolate|Get the breed info about York Chocolates|
-|A random breed|.cat breed|Get a random breed and info about said breed|
-|Random image|.cat random|Get a random cat image|
-|Invite|.cat invite|Get the invite link for the bot|
-|Support|.cat support|Get the link for the support server|
+|Breed info|.cat breed york chocolate|Get the breed info about York Chocolates.|
+|A random breed|.cat breed|Get a random breed and info about said breed.|
+|Random image|.cat random|Get a random cat image.|
+|Invite|.cat invite|Get the invite link for the bot.|
+|Support|.cat support|Get the link for the support server.|
 |Help|.cat help|Show the help menu.
 
 All of the data is from remote APIs so be sure to check out the source code and see how to use those APIs for your own projects!
