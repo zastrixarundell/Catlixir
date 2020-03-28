@@ -29,6 +29,7 @@ defmodule Catlixir.Command.Help do
     |> put_title("Co-meow-nds for: #{me.username}!")
     |> put_field("#{@command} help", "Show this menu!")
     |> put_field("#{@command} fact", "Get a random fact about us (cats)!")
+    |> put_field("#{@command} breed (name)", "Get info about a breed. If the name is not specified, it will return a random breed.")
     |> put_color_on_embed(message)
   end
 end
