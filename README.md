@@ -4,7 +4,19 @@ A discord bot written in Elixir for... Cats!
 
 [![Discord server badge](https://img.shields.io/discord/602112468961067011)](https://discord.gg/MdASH22) ![Github release](https://img.shields.io/github/v/release/zastrixarundell/catlixir)
 
-## Usage
+## Usage - client side
+This bot has multiple commands mostly regarding cats. Currently there are 6 commands.
+
+* `.cat fact` - show a random fact about cats.
+* `.cat breed (name)` - show details about a specified breed or show a random breed depending if name is specified.
+* `.cat random` - get a random cat image.
+* `.cat invite` - invite the bot to a discord server.
+* `.cat support` - join the support server.
+* `.cat help` - show the help menu.
+
+All of the data is from remote APIs so be sure to check out the source code and see how to use those APIs for your own projects!
+
+## Usage - server side
 This bot can run independently by itself. You need to setup some system environments which are explained in the `config.exs`. 
 
 To start it you just need to do:
