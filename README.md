@@ -1,6 +1,6 @@
 # Catlixir
 A discord bot written in Elixir for... Cats!
-![Catlixir](https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/catlixir.jpg Catlixir)
+![Catlixir image](https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/catlixir.png "Catlixir")
 
 ## Usage
 This bot can run independently by itself. You need to setup some system environments which are explained in the `config.exs`. 
