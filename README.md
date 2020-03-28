@@ -2,6 +2,8 @@
 A discord bot written in Elixir for... Cats!
 ![Catlixir image](https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/catlixir.png "Catlixir")
 
+[![Discord server badge](https://img.shields.io/discord/602112468961067011)](https://discord.gg/MdASH22) ![Github release](https://img.shields.io/github/v/release/zastrixarundell/catlixir)
+
 ## Usage
 This bot can run independently by itself. You need to setup some system environments which are explained in the `config.exs`. 
 
