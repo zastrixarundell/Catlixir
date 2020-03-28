@@ -1,6 +1,6 @@
 use Mix.Config
 
-# Configuration for the Discord used by nostrum
+# Configuration for Nostrum
 shards =
   System.get_env("DISCORD_BOT_SHARDS", "-1")
   |> String.to_integer()
@@ -18,14 +18,12 @@ config :nostrum,
   num_shards: if shards != -1, do: shards, else: :auto
 
 # Configuration for Catlixir
-
 the_cat_api_key =
   System.get_env("THE_CAT_API_KEY") ||
     raise """
     The cat api key not found!
     Get one for free at: https://thecatapi.com/
     """
-
 
 config :catlixir,
   command: System.get_env("DISCORD_BOT_COMMAND") || ".cat",
