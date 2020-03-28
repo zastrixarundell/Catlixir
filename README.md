@@ -16,7 +16,8 @@ Catlixir can as well run as a part of your application (tested on Phoenix). For 
 ```elixir
 def deps do
   [
-    {:catlixir, "~> 0.1.0"}
+    # ...
+    {:catlixir, git: "https://github.com/zastrixarundell/Catlixir"}
   ]
 end
 ```
