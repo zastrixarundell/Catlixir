@@ -25,8 +25,12 @@ defmodule Catlixir.Command.Help do
 
     me = Nostrum.Cache.Me.get()
 
+    avatar_url =
+      "https://cdn.discordapp.com/avatars/#{me.id}/#{me.avatar}.png"
+
     %Nostrum.Struct.Embed{}
     |> put_title("Co-meow-nds for: #{me.username}!")
+    |> put_thumbnail(avatar_url)
     |> put_field("#{@command} help", "Show this menu!")
     |> put_field("#{@command} fact", "Get a random fact about us (cats)!")
     |> put_field("#{@command} breed (name)", "Get info about a breed. If the name is not specified, it will return a random breed.")
