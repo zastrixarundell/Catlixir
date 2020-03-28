@@ -19,9 +19,9 @@ defmodule Catlixir.Command.Random do
   Sends a random image from the CATAAS API.
   """
   def create_random_pic_embed(message) do
-
     %Nostrum.Struct.Embed{}
     |> put_title("Random cat image!")
+    |> put_description("Here's an image of a purr-y ally!")
     |> put_image("https://cataas.com/cat?#{generate_random_unique_param()}")
     |> put_color_on_embed(message)
   end
