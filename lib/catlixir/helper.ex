@@ -43,7 +43,7 @@ defmodule Catlixir.Helper do
   @doc """
   Generates a nostrum embed for an event if the api has an error 404.
   """
-  def create_api_error_embed(message) do
+  def create_api_error_embed!(message) do
     import Nostrum.Struct.Embed
 
     %Nostrum.Struct.Embed{}
@@ -57,7 +57,7 @@ defmodule Catlixir.Helper do
   Generates a nostrum embed for an event if the api has an error
   which is not 404.
   """
-  def create_error_embed(message) do
+  def create_error_embed!(message) do
     import Nostrum.Struct.Embed
 
     %Nostrum.Struct.Embed{}

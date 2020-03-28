@@ -42,11 +42,11 @@ defmodule Catlixir.Command.Breed do
 
         {:ok, %HTTPoison.Response{status_code: 404}} ->
           message.channel_id
-          |> Api.create_message(embed: create_api_error_embed(message))
+          |> Api.create_message(embed: create_api_error_embed!(message))
 
         {:error, _error} ->
           message.channel_id
-          |> Api.create_message(embed: create_error_embed(message))
+          |> Api.create_message(embed: create_error_embed!(message))
       end
     else
 
@@ -86,6 +86,7 @@ defmodule Catlixir.Command.Breed do
         |> put_title("Info about #{name}:")
         |> put_description(description)
         |> put_url(wiki)
+        |> put_image(get_wiki_image_url!(wiki))
 
       permit = ["health_issues", "alt_names", "life_span"]
 
@@ -120,6 +121,48 @@ defmodule Catlixir.Command.Breed do
     |> put_description("I couldn't find that breed!")
     |> put_image("https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/oh_noes.jpg")
     |> put_color_on_embed(message)
+  end
+
+  @doc false
+  def get_wiki_image_url!(wiki) when is_nil(wiki) do
+    nil
+  end
+
+  @doc """
+  Gets an of the wiki url (if there is one). It will
+  return nil if nothing is found.
+  """
+  def get_wiki_image_url!(wiki) do
+    name =
+      wiki
+      |> String.replace_prefix("https://en.wikipedia.org/wiki/", "")
+      |> String.replace("(cat)", "cat")
+
+    result =
+      "https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=original&titles=#{name}"
+      |> HTTPoison.get()
+
+    case result do
+      {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+        pages =
+          body
+          |> Jason.decode!()
+          |> Map.get("query")
+          |> Map.get("pages")
+
+        if(Enum.member?(pages, -1)) do
+          nil
+        else
+          {_id, data} =
+            pages
+            |> Map.to_list()
+            |> List.first()
+
+          data["original"]["source"]
+        end
+      _ ->
+        nil
+    end
   end
 
 end

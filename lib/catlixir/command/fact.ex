@@ -16,18 +16,18 @@ defmodule Catlixir.Command.Fact do
         embed =
           body
           |> Jason.decode!()
-          |> create_fact_embed(message)
+          |> create_fact_embed!(message)
 
         message.channel_id
         |> Api.create_message(embed: embed)
 
       {:ok, %HTTPoison.Response{status_code: 404}} ->
         message.channel_id
-        |> Api.create_message(embed: create_api_error_embed(message))
+        |> Api.create_message(embed: create_api_error_embed!(message))
 
       {:error, _error} ->
         message.channel_id
-        |> Api.create_message(embed: create_error_embed(message))
+        |> Api.create_message(embed: create_error_embed!(message))
     end
 
     :ok
@@ -50,7 +50,7 @@ defmodule Catlixir.Command.Fact do
   @doc """
   Generates a nostrum embed containing the random generated fact.
   """
-  def create_fact_embed(fact_map, message) do
+  def create_fact_embed!(fact_map, message) do
     import Nostrum.Struct.Embed
     import Catlixir.Helper
 

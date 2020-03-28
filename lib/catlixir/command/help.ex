@@ -9,7 +9,7 @@ defmodule Catlixir.Command.Help do
   def perform(_arguments, message) do
     alias Nostrum.Api
 
-    Api.create_message(message.channel_id, embed: generate_help_embed(message))
+    Api.create_message(message.channel_id, embed: generate_help_embed!(message))
     :ok
   end
 
@@ -19,7 +19,7 @@ defmodule Catlixir.Command.Help do
   Generates a nostrum embed which contains all of the commands which
   this bot has.
   """
-  def generate_help_embed(message) do
+  def generate_help_embed!(message) do
     import Nostrum.Struct.Embed
     import Catlixir.Helper
 
