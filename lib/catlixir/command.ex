@@ -4,26 +4,31 @@ defmodule Catlixir.Command do
   """
 
   @command_prefix Application.get_env(:catlixir, :command)
-  alias Catlixir.Command.{Help, Fact}
 
   @doc """
   Handles all of the message and sends them to the
   required command modules
   """
   def handle_message(message) do
-    arguments =
+    {command, arguments} =
       message.content
       |> String.replace_prefix(@command_prefix, " ")
       |> String.trim_leading()
       |> String.downcase()
       |> String.split(" ")
+      |> List.pop_at(0)
 
-    case Enum.at(arguments, 0) do
+    alias Catlixir.Command.{Help, Fact, Breed}
+
+    case command do
       "help" ->
         Help.perform(arguments, message)
 
       "fact" ->
         Fact.perform(arguments, message)
+
+      "breed" ->
+        Breed.perform(arguments, message)
 
       _ ->
         Help.perform(arguments, message)
