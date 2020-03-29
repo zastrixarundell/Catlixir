@@ -91,7 +91,7 @@ defmodule Catlixir.Command.RedditPost do
     json =
       if is_list(json), do: List.first(json), else: json
 
-     json =
+    json =
       json
       |> Map.get("data")
       |> Map.get("children")
