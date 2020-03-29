@@ -35,7 +35,7 @@ defmodule Catlixir.Command.Help do
     |> put_thumbnail(avatar_url)
     |> put_field("#{@command} fact", "Get a random fact about us (cats)!")
     |> put_field("#{@command} breed (name)", "Get info about a breed. If the name is not specified, it will return a random breed.")
-    |> put_field("#{@command} random", "Get a random image of a cat!")
+    |> put_field("#{@command} random", "Get a random image from the r/Catmeme subreddit!")
     |> put_field("#{@command} meme", "Get a random meme from the r/Catmeme subreddit!")
     |> put_field("#{@command} invite", "Invite the bot to your server.")
     |> put_field("#{@command} support", "Go to the support server.")

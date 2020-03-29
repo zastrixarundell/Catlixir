@@ -22,34 +22,26 @@ defmodule Catlixir.Command do
       Help,
       Fact,
       Breed,
-      Random,
       Invite,
       Support,
-      Meme
+      RedditPost
     }
 
     case command do
       "help" ->
         Help.perform(arguments, message)
-
       "fact" ->
         Fact.perform(arguments, message)
-
       "breed" ->
         Breed.perform(arguments, message)
-
       "random" ->
-        Random.perform(arguments, message)
-
+        RedditPost.perform("cat", message)
       "invite" ->
         Invite.perform(arguments, message)
-
       "support" ->
         Support.perform(arguments, message)
-
       "meme" ->
-        Meme.perform(arguments, message)
-
+        RedditPost.perform("catmemes", message)
       _ ->
         Help.perform(arguments, message)
     end
