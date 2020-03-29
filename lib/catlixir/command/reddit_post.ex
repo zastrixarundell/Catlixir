@@ -1,24 +1,25 @@
-defmodule Catlixir.Command.Meme do
+defmodule Catlixir.Command.RedditPost do
   @behaviour Catlixir.Command
 
   @moduledoc """
-  Module representing the meme Discord command
+  Module representing a RedditPost command. This is used for images and memes
+  as they are essentially the same API-wise.
   """
 
   import Catlixir.Helper
 
   @doc false
-  def perform(_arguments, message) do
+  def perform(subreddit, message) do
 
     alias Nostrum.Api
 
-    case get_meme(message) do
+    case get_post(subreddit, message) do
       {:ok, embed} ->
         message.channel_id
         |> Api.create_message(embed: embed)
 
-      {:error, :not_a_meme} ->
-        perform(nil, message)
+      {:error, :not_a_good_post} ->
+        perform(subreddit, message)
 
       {:error, :"404"} ->
         message.channel_id
@@ -35,14 +36,14 @@ defmodule Catlixir.Command.Meme do
   @doc """
   Gets a meme from redit. Returns `{:ok, %Nostrum.Struct.Embed{}}` if the result
   is positive and returns
-  * {:error, :not_a_meme}
+  * {:error, :not_a_good_post}
   * {:error, :"404"}
   * {:error, :else}
   if not.
   """
-  def get_meme(message) do
+  def get_post(subreddit, message) do
     url =
-      "https://www.reddit.com/r/catmeme/random.json"
+      "https://www.reddit.com/r/#{subreddit}/random.json"
 
     case HTTPoison.get(url) do
       {:ok, %HTTPoison.Response{status_code: 302, headers: headers}} ->
@@ -51,10 +52,10 @@ defmodule Catlixir.Command.Meme do
           |> Enum.map(fn {key, value} -> {"#{key}" |> String.to_atom(), value} end)
           |> Keyword.get(:location)
           |> get_data_for_location!()
-          |> create_meme_embed!(message)
+          |> create_image_embed!(message)
 
         if status == :error do
-          {:error, :not_a_meme}
+          {:error, :not_a_good_post}
         else
           {:ok, embed}
         end
@@ -80,11 +81,11 @@ defmodule Catlixir.Command.Meme do
   end
 
   @doc """
-  Creates a meme embed if a meme is a meme. Retuns a touple of
+  Creates a image embed if a post contains an image. Retuns a touple of
   `{:ok, %Nostrum.Struct.Embed{}}` if it's correct. Returns
   `{:error, %Nostrum.Struct.Embed{}}` if not.
   """
-  def create_meme_embed!(json, message) do
+  def create_image_embed!(json, message) do
     import Nostrum.Struct.Embed
 
     json =
