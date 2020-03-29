@@ -7,6 +7,7 @@ defmodule Catlixir.Command.Meme do
 
   import Catlixir.Helper
 
+  @doc false
   def perform(_arguments, message) do
 
     alias Nostrum.Api
@@ -31,6 +32,14 @@ defmodule Catlixir.Command.Meme do
     :ok
   end
 
+  @doc """
+  Gets a meme from redit. Returns `{:ok, %Nostrum.Struct.Embed{}}` if the result
+  is positive and returns
+  * {:error, :not_a_meme}
+  * {:error, :"404"}
+  * {:error, :else}
+  if not.
+  """
   def get_meme(message) do
     url =
       "https://www.reddit.com/r/catmeme/random.json"
@@ -58,6 +67,9 @@ defmodule Catlixir.Command.Meme do
     end
   end
 
+  @doc """
+  Gets the data of the redit JSON location which was specified in a header.
+  """
   def get_data_for_location!(location) do
     case HTTPoison.get(location) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
@@ -67,6 +79,11 @@ defmodule Catlixir.Command.Meme do
     end
   end
 
+  @doc """
+  Creates a meme embed if a meme is a meme. Retuns a touple of
+  `{:ok, %Nostrum.Struct.Embed{}}` if it's correct. Returns
+  `{:error, %Nostrum.Struct.Embed{}}` if not.
+  """
   def create_meme_embed!(json, message) do
     import Nostrum.Struct.Embed
 
