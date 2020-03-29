@@ -34,7 +34,7 @@ defmodule Catlixir.Command.RedditPost do
   end
 
   @doc """
-  Gets a meme from redit. Returns `{:ok, %Nostrum.Struct.Embed{}}` if the result
+  Gets a image post from redit. Returns `{:ok, %Nostrum.Struct.Embed{}}` if the result
   is positive and returns
   * {:error, :not_a_good_post}
   * {:error, :"404"}
