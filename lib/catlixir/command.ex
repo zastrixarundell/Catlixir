@@ -3,7 +3,7 @@ defmodule Catlixir.Command do
   Module representing discord commands.
   """
 
-  @command_prefix Application.get_env(:catlixir, :command)
+  @command_prefix Catlixir.get_command_prefix!()
 
   @doc """
   Handles all of the message and sends them to the
