@@ -14,7 +14,7 @@ defmodule Catlixir.Consumer do
     Consumer.start_link(__MODULE__)
   end
 
-  @command Application.get_env(:catlixir, :command)
+  @command Catlixir.get_command_prefix!()
 
   @doc """
   Handles the `:MESSAGE_CREATE` event. If it is

@@ -13,7 +13,7 @@ defmodule Catlixir.Command.Help do
     :ok
   end
 
-  @command Application.get_env(:catlixir, :command)
+  @command Catlixir.get_command_prefix!()
 
   @doc """
   Generates a nostrum embed which contains all of the commands which
