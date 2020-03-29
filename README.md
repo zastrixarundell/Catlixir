@@ -1,5 +1,6 @@
 # Catlixir
 A discord bot written in Elixir for... Cats!
+
 ![Catlixir image](https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/catlixir.png "Catlixir")
 
 [![Discord server badge](https://img.shields.io/discord/602112468961067011)](https://discord.gg/MdASH22) ![Github release](https://img.shields.io/github/v/release/zastrixarundell/catlixir)
@@ -13,6 +14,7 @@ This bot has multiple commands mostly regarding cats. Currently there are 6 comm
 |Breed info|.cat breed york chocolate|Get the breed info about York Chocolates.|
 |A random breed|.cat breed|Get a random breed and info about said breed.|
 |Random image|.cat random|Get a random cat image.|
+|Random meme|.cat meme|Get a random cat meme from `r/Catmeme`.|
 |Invite|.cat invite|Get the invite link for the bot.|
 |Support|.cat support|Get the link for the support server.|
 |Help|.cat help|Show the help menu.
