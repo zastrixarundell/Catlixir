@@ -6,7 +6,7 @@ A discord bot written in Elixir for... Cats!
 [![Discord server badge](https://img.shields.io/discord/602112468961067011)](https://discord.gg/MdASH22) ![Github release](https://img.shields.io/github/v/release/zastrixarundell/catlixir)
 
 ## Usage - client side
-This bot has multiple commands mostly regarding cats. Currently there are 6 commands.
+This bot has multiple commands mostly regarding cats. Here are the commands:
 
 |Name|Usage|Description|
 |----|-----|-----------|
