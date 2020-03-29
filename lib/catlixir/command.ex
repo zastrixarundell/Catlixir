@@ -24,7 +24,8 @@ defmodule Catlixir.Command do
       Breed,
       Random,
       Invite,
-      Support
+      Support,
+      Meme
     }
 
     case command do
@@ -45,6 +46,9 @@ defmodule Catlixir.Command do
 
       "support" ->
         Support.perform(arguments, message)
+
+      "meme" ->
+        Meme.perform(arguments, message)
 
       _ ->
         Help.perform(arguments, message)
