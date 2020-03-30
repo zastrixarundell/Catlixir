@@ -45,7 +45,12 @@ defmodule Catlixir.Command.RedditPost do
     url =
       "https://www.reddit.com/r/#{subreddit}/random.json"
 
-    case HTTPoison.get(url) do
+    headers = [
+      "User-agent": "Catlixir",
+      "Accept": "Application/json; Charset=utf-8"
+    ]
+
+    case HTTPoison.get(url, headers) do
       {:ok, %HTTPoison.Response{status_code: 302, headers: headers}} ->
         {status, embed} =
           headers
