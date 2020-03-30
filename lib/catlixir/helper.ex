@@ -61,7 +61,7 @@ defmodule Catlixir.Helper do
     import Nostrum.Struct.Embed
 
     %Nostrum.Struct.Embed{}
-    |> put_title("Oh noes! The an error meow-curred!")
+    |> put_title("Oh noes! An error meow-curred!")
     |> put_description("Something went wrong hooman!")
     |> put_image("https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/oh_noes.jpg")
     |> put_color_on_embed(message)
