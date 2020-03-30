@@ -2,6 +2,7 @@
 
 # 0.1.5
 - Fixed typo on error message.
+- Using custom `User-agent` header with Reddit.
 
 # 0.1.4
 - Removed `Catlixir.Command.Random` module. 
