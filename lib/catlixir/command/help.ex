@@ -23,8 +23,6 @@ defmodule Catlixir.Command.Help do
     import Nostrum.Struct.Embed
     import Catlixir.Helper
 
-    {:ok, vsn} = :application.get_key(:catlixir, :vsn)
-
     %Nostrum.Struct.Embed{}
     |> put_title("Co-meow-nds for: #{Catlixir.get_username!()}!")
     |> put_thumbnail(Catlixir.get_avatar_url!())
@@ -35,7 +33,7 @@ defmodule Catlixir.Command.Help do
     |> put_field("#{@command} invite", "Invite the bot to your server.")
     |> put_field("#{@command} support", "Go to the support server.")
     |> put_field("#{@command} help", "Show this menu.")
-    |> put_footer("Current version: #{vsn |> List.to_string()}")
+    |> put_footer("Current version: #{Catlixir.get_version!()}")
     |> put_color_on_embed(message)
   end
 end

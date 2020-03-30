@@ -46,7 +46,7 @@ defmodule Catlixir.Command.RedditPost do
       "https://www.reddit.com/r/#{subreddit}/random.json"
 
     headers = [
-      "User-agent": "Catlixir",
+      "User-agent": "#{Catlixir.get_username!()} #{Catlixir.get_version!}",
       "Accept": "Application/json; Charset=utf-8"
     ]
 
