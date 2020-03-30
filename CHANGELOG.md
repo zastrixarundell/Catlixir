@@ -1,5 +1,8 @@
 # Changelog
 
+# 0.1.5
+- Fixed typo on error message.
+
 # 0.1.4
 - Removed `Catlixir.Command.Random` module. 
 - Started using `Catlixir` module.
