@@ -29,11 +29,14 @@ defmodule Catlixir.Command.Vote do
       else:
         "off"
 
+    votes =
+      DiscordBotList.get_single_bot().monthly_points
+
 
     %Nostrum.Struct.Embed{}
-    |> put_title("Go to the support server!")
+    |> put_title("Vote for #{Catlixir.get_username!()}!")
     |> put_description("You can go to and vote by following [this](https://top.gg/bot/#{id}/vote) link!")
-    |> put_footer("Weekly boost is #{boost}")
+    |> put_footer("Weekly boost is #{boost} and I already have #{votes} this month!")
     |> put_color_on_embed(message)
   end
 end
