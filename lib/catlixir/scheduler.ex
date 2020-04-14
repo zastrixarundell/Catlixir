@@ -3,6 +3,7 @@ defmodule Catlixir.Scheduler do
 
   alias DiscordBotList.Struct.BotStats
 
+  @doc false
   def update_dbl_status() do
     number_of_shards = Application.get_env(:nostrum, :num_shards)
     server_count = Catlixir.get_server_count!()
