@@ -8,7 +8,8 @@ defmodule Catlixir.Application do
   def start(_type, _args) do
     children = [
       # I need to add listeners here
-      Catlixir.Consumer
+      Catlixir.Consumer,
+      Catlixir.Scheduler
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

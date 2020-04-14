@@ -4,7 +4,7 @@ defmodule Catlixir.MixProject do
   def project do
     [
       app: :catlixir,
-      version: "0.1.5",
+      version: "0.1.6",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       deps: deps()
@@ -27,6 +27,8 @@ defmodule Catlixir.MixProject do
       {:nostrum, "~> 0.4"},
       {:httpoison, "~> 1.6"},
       {:jason, "~> 1.2"},
+      {:discord_bot_list, "~> 0.1"},
+      {:quantum, "~> 3.0-rc"}
     ]
   end
 end
