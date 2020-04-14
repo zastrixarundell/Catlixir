@@ -34,3 +34,8 @@ config :catlixir,
 config :discord_bot_list,
   id: System.get_env("DBL_ID"),
   token: System.get_env("DBL_TOKEN")
+
+config :catlixir, Catlixir.Scheduler,
+  jobs: [
+    {"* * * * *", fn -> Catlixir.Scheduler.update_dbl_status() end}
+  ]

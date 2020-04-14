@@ -27,7 +27,8 @@ defmodule Catlixir.MixProject do
       {:nostrum, "~> 0.4"},
       {:httpoison, "~> 1.6"},
       {:jason, "~> 1.2"},
-      {:discord_bot_list, "~> 0.1"}
+      {:discord_bot_list, "~> 0.1"},
+      {:quantum, "~> 3.0-rc"}
     ]
   end
 end
