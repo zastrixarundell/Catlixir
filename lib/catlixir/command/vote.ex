@@ -25,18 +25,14 @@ defmodule Catlixir.Command.Vote do
 
     boost =
       if DiscordBotList.weekend?(), do:
-        "on",
+        "active",
       else:
-        "off"
-
-    votes =
-      DiscordBotList.get_single_bot().monthly_points
-
+        "inactive"
 
     %Nostrum.Struct.Embed{}
     |> put_title("Vote for #{Catlixir.get_username!()}!")
     |> put_description("You can go to and vote by following [this](https://top.gg/bot/#{id}/vote) link!")
-    |> put_footer("Weekly boost is #{boost} and I already have #{votes} this month!")
+    |> put_footer("Weekly boost is #{boost}!")
     |> put_color_on_embed(message)
   end
 end
