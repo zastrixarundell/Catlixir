@@ -31,11 +31,12 @@ config :catlixir,
   invite_url: System.get_env("DISCORD_BOT_INVITE_URL"),
   support_url: System.get_env("DISCORD_BOT_SUPPORT")
 
+# Configuration for DiscordBotList
 config :discord_bot_list,
   id: System.get_env("DBL_ID"),
   token: System.get_env("DBL_TOKEN")
 
 config :catlixir, Catlixir.Scheduler,
   jobs: [
-    {"* * * * *", fn -> Catlixir.Scheduler.update_dbl_status() end}
+    {"* * * * *", &Catlixir.Scheduler.update_dbl_status/0}
   ]
