@@ -46,11 +46,10 @@ defmodule Catlixir.Helper do
   def create_api_error_embed!(message) do
     import Nostrum.Struct.Embed
 
-    %Nostrum.Struct.Embed{}
+    create_empty_embed!(message)
     |> put_title("Oh noes! The page wasn't found!")
     |> put_description("The page from where I get the facts is down! This is a cat-astrophe!")
     |> put_image("https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/oh_noes.jpg")
-    |> put_color_on_embed(message)
   end
 
   @doc """
@@ -60,11 +59,10 @@ defmodule Catlixir.Helper do
   def create_error_embed!(message) do
     import Nostrum.Struct.Embed
 
-    %Nostrum.Struct.Embed{}
+    create_empty_embed!(message)
     |> put_title("Oh noes! An error meow-curred!")
     |> put_description("Something went wrong hooman!")
     |> put_image("https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/oh_noes.jpg")
-    |> put_color_on_embed(message)
   end
 
   @doc """

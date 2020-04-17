@@ -18,9 +18,8 @@ defmodule Catlixir.Command.Support do
     import Nostrum.Struct.Embed
     import Catlixir.Helper
 
-    %Nostrum.Struct.Embed{}
+    create_empty_embed!(message)
     |> put_title("Go to the support server!")
     |> put_description("You can go to the support server by following [this](#{@support_url}) link!")
-    |> put_color_on_embed(message)
   end
 end

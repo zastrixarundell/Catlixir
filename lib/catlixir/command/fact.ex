@@ -57,11 +57,10 @@ defmodule Catlixir.Command.Fact do
     fact = if String.ends_with?(fact_map["fact"], [".", "!", "?"]),
       do: fact_map["fact"], else: "#{fact_map["fact"]}."
 
-    %Nostrum.Struct.Embed{}
+    create_empty_embed!(message)
     |> put_title("Random cat fact:")
     |> put_description(fact)
     |> put_image("https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/laptop.jpg")
-    |> put_color_on_embed(message)
   end
 
 end

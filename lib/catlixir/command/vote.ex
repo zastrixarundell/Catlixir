@@ -29,10 +29,9 @@ defmodule Catlixir.Command.Vote do
       else:
         "inactive"
 
-    %Nostrum.Struct.Embed{}
+    create_empty_embed!(message)
     |> put_title("Vote for #{Catlixir.get_username!()}!")
     |> put_description("You can go to and vote by following [this](https://top.gg/bot/#{id}/vote) link!")
     |> put_footer("Weekly boost is #{boost}!")
-    |> put_color_on_embed(message)
   end
 end
