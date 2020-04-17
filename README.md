@@ -17,8 +17,8 @@ This bot has multiple commands mostly regarding cats. Here are the commands:
 |Random meme|.cat meme|Get a random cat meme from `r/Catmeme`.|
 |Invite|.cat invite|Get the invite link for the bot.|
 |Support|.cat support|Get the link for the support server.|
-|Support|.cat vote|Go to the vote url on top.gg!|
-|Support|.cat source|See the source code.|
+|Vote|.cat vote|Go to the vote url on top.gg!|
+|Source|.cat source|See the source code.|
 |Help|.cat help|Show the help menu.
 
 All of the data is from remote APIs so be sure to check out the source code and see how to use those APIs for your own projects!
