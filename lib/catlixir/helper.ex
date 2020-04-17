@@ -67,4 +67,12 @@ defmodule Catlixir.Helper do
     |> put_color_on_embed(message)
   end
 
+  @doc """
+  Create an empty embed and put a color on it.
+  """
+  def create_empty_embed!(message) do
+    %Nostrum.Struct.Embed{}
+    |> put_color_on_embed(message)
+  end
+
 end
