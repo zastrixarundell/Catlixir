@@ -42,7 +42,7 @@ def deps do
   ]
 end
 ```
-And you're good to go! The bot will start by itself.
+And you're good to go! The bot will start by itself. You can see how [CatlixirWeb](https://github.com/zastrixarundell/CatlixirWeb) is using it.
 
 ## Configuration
 If you're using the bot, you can use this pre-made configuration so save you time:
