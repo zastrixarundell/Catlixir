@@ -21,7 +21,7 @@ defmodule Catlixir.Command.Vote do
     import Catlixir.Helper
 
     id =
-      DiscordBotList.get_single_bot().id
+      DiscordBotList.get_default_id()
 
     boost =
       if DiscordBotList.weekend?(), do:

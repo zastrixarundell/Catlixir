@@ -1,5 +1,8 @@
 # Changelog
 
+# 0.1.8
+- Using default ID for vote command.
+
 # 0.1.7
 - Added source command.
 - Using create universal function for color embeds in Helper.
