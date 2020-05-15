@@ -1,7 +1,7 @@
 # Catlixir
 A discord bot written in Elixir for... Cats!
 
-![Catlixir image](https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/catlixir.png "Catlixir")
+![Catlixir image](https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/catlixir_banner.png "Catlixir")
 
 [![Discord server badge](https://img.shields.io/discord/602112468961067011)](https://discord.gg/MdASH22) [![Server count](https://img.shields.io/endpoint?url=https%3A%2F%2Fcatlixir.gigalixirapp.com%2Fapi%2Fshield%2Fservers)](https://discordapp.com/api/oauth2/authorize?client_id=641309305227837440&permissions=0&scope=bot) [![User count](https://img.shields.io/endpoint?url=https%3A%2F%2Fcatlixir.gigalixirapp.com%2Fapi%2Fshield%2Fusers)](](https://discordapp.com/api/oauth2/authorize?client_id=641309305227837440&permissions=0&scope=bot)) ![Elixir version](https://img.shields.io/endpoint?url=https%3A%2F%2Fcatlixir.gigalixirapp.com%2Fapi%2Fshield%2Felixir) ![Github release](https://img.shields.io/github/v/release/zastrixarundell/catlixir)
 
