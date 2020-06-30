@@ -1,5 +1,8 @@
 # Changelog
 
+# 0.1.9
+- Added a application variable in the mix task to not start the discord bot listener process when a non-bot process is start. Example: `iex -S mix` won't start a new discord bot causing multiple messages to be sent at the same command call.
+
 # 0.1.8
 - Using default ID for vote command.
 
