@@ -30,3 +30,13 @@ config :catlixir,
   the_cat_api_key: the_cat_api_key,
   invite_url: System.get_env("DISCORD_BOT_INVITE_URL"),
   support_url: System.get_env("DISCORD_BOT_SUPPORT")
+
+# Configuration for DiscordBotList
+config :discord_bot_list,
+  id: System.get_env("DBL_ID"),
+  token: System.get_env("DBL_TOKEN")
+
+config :catlixir, Catlixir.Scheduler,
+  jobs: [
+    {"* * * * *", &Catlixir.Scheduler.update_dbl_status/0}
+  ]

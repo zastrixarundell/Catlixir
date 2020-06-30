@@ -116,7 +116,7 @@ defmodule Catlixir.Command.Breed do
       {wiki, result} = Map.pop(result, "wikipedia_url")
 
       embed =
-        %Nostrum.Struct.Embed{}
+        Catlixir.Helper.create_empty_embed!(message)
         |> put_title("#{name}")
         |> put_description(description)
         |> put_url(wiki)
@@ -150,11 +150,10 @@ defmodule Catlixir.Command.Breed do
   def create_empty_embed(message) do
     import Nostrum.Struct.Embed
 
-    %Nostrum.Struct.Embed{}
+    Catlixir.Helper.create_empty_embed!(message)
     |> put_title("Oh noes! An error meow-curred!")
     |> put_description("I couldn't find that breed!")
     |> put_image("https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/oh_noes.jpg")
-    |> put_color_on_embed(message)
   end
 
   @doc false

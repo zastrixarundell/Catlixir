@@ -113,12 +113,11 @@ defmodule Catlixir.Command.RedditPost do
     end
 
     embed =
-      %Nostrum.Struct.Embed{}
+      create_empty_embed!(message)
       |> put_title(json["title"])
       |> put_image(json["url"])
       |> put_url("https://www.reddit.com#{link}")
       |> put_footer("u/#{json["author"]}")
-      |> put_color_on_embed(message)
 
     {status, embed}
   end

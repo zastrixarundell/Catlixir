@@ -24,7 +24,9 @@ defmodule Catlixir.Command do
       Breed,
       Invite,
       Support,
-      RedditPost
+      RedditPost,
+      Vote,
+      Source
     }
 
     case command do
@@ -42,6 +44,10 @@ defmodule Catlixir.Command do
         Support.perform(arguments, message)
       "meme" ->
         RedditPost.perform("catmemes", message)
+      "vote" ->
+        Vote.perform(arguments, message)
+      "source" ->
+        Source.perform(arguments, message)
       _ ->
         Help.perform(arguments, message)
     end

@@ -23,7 +23,7 @@ defmodule Catlixir.Command.Help do
     import Nostrum.Struct.Embed
     import Catlixir.Helper
 
-    %Nostrum.Struct.Embed{}
+    create_empty_embed!(message)
     |> put_title("Co-meow-nds for: #{Catlixir.get_username!()}!")
     |> put_thumbnail(Catlixir.get_avatar_url!())
     |> put_field("#{@command} fact", "Get a random fact about us (cats)!")
@@ -32,8 +32,9 @@ defmodule Catlixir.Command.Help do
     |> put_field("#{@command} meme", "Get a random meme from the `r/Catmeme` subreddit!")
     |> put_field("#{@command} invite", "Invite the bot to your server.")
     |> put_field("#{@command} support", "Go to the support server.")
+    |> put_field("#{@command} vote", "Vote for the bot on top.gg!")
+    |> put_field("#{@command} source", "Show the source code.")
     |> put_field("#{@command} help", "Show this menu.")
     |> put_footer("Current version: #{Catlixir.get_version!()}")
-    |> put_color_on_embed(message)
   end
 end

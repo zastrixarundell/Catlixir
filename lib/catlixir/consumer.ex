@@ -22,7 +22,7 @@ defmodule Catlixir.Consumer do
   parse it to the command module.
   """
   def handle_event({:MESSAGE_CREATE, message, _ws_state}) do
-    if (!message.author.bot and is_catlixir_command? message), do:
+    if (is_running?() and !message.author.bot and is_catlixir_command? message), do:
       Catlixir.Command.handle_message(message)
   end
 
@@ -30,7 +30,8 @@ defmodule Catlixir.Consumer do
   Listen to ready event and update the status.
   """
   def handle_event({:READY, _, _}) do
-    Nostrum.Api.update_status("", "you type #{@command}", 3)
+    if is_running?(), do:
+      Nostrum.Api.update_status("", "you type #{@command}", 3)
   end
 
 
@@ -52,4 +53,7 @@ defmodule Catlixir.Consumer do
       |> Enum.at(0)
       |> String.equivalent?(@command)
   end
+
+  @doc false
+  defp is_running?, do: Application.get_env(:catlixir, :process, false)
 end
