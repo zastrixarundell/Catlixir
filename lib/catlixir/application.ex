@@ -6,11 +6,19 @@ defmodule Catlixir.Application do
   use Application
 
   def start(_type, _args) do
-    children = [
-      # I need to add listeners here
-      Catlixir.Consumer,
-      Catlixir.Scheduler
-    ]
+
+    children =
+      if Application.get_env(:catlixir, :process, false) do
+        [
+          # I need to add listeners here
+          Catlixir.Consumer,
+          Catlixir.Scheduler
+        ]
+      else
+        [
+          Catlixir.Consumer
+        ]
+      end
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
