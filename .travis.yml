@@ -10,4 +10,4 @@ env:
 
 script: 
   - mix deps.compile
-  - echo "Success!"
+  - mix compile
