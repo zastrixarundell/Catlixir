@@ -28,7 +28,10 @@ defmodule Catlixir.MixProject do
       {:httpoison, "~> 1.6"},
       {:jason, "~> 1.2"},
       {:discord_bot_list, "~> 0.1"},
-      {:quantum, "~> 3.0-rc"}
+      {:quantum, "~> 3.0-rc"},
+      {:cowlib, "~> 2.9.1", override: true},
+      {:plug_cowboy, "~> 2.4"},
+      {:poison, "~> 4.0", override: true}
     ]
   end
 end
