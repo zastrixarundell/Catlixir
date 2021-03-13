@@ -6,12 +6,7 @@ shards =
   |> String.to_integer()
 
 token =
-  System.get_env("DISCORD_BOT_TOKEN") ||
-    raise """
-    Discord bot token is not specified! You can create an app
-    at https://discordapp.com/developers and then get the token
-    of the created bot!
-    """
+  System.get_env("DISCORD_BOT_TOKEN")
 
 config :nostrum,
   token: token,
@@ -19,11 +14,7 @@ config :nostrum,
 
 # Configuration for Catlixir
 the_cat_api_key =
-  System.get_env("THE_CAT_API_KEY") ||
-    raise """
-    The cat api key not found!
-    Get one for free at: https://thecatapi.com/
-    """
+  System.get_env("THE_CAT_API_KEY")
 
 config :catlixir,
   command: System.get_env("DISCORD_BOT_COMMAND") || ".cat",
