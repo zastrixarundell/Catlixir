@@ -30,7 +30,7 @@ defmodule Catlixir.Consumer do
   Listen to ready event and update the status.
   """
   def handle_event({:READY, _, _}) do
-    Nostrum.Api.update_status("", "you type #{@command}", 3)
+    Nostrum.Api.update_status(:online, "you type #{@command}", 3)
   end
 
 

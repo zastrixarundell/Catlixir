@@ -1,5 +1,8 @@
 # Changelog
 
+# 0.2.0
+- Added webserver as well.
+
 # 0.1.8
 - Using default ID for vote command.
 
