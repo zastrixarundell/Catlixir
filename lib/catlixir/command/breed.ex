@@ -1,12 +1,15 @@
 defmodule Catlixir.Command.Breed do
-  @behaviour Catlixir.Command
 
   @moduledoc """
   Module regarding the breed discord command.
   """
 
+  @behaviour Catlixir.Command
+
   @cat_api Application.get_env(:catlixir, :the_cat_api_key)
+
   import Catlixir.Helper
+  import Nostrum.Struct.Embed
 
   alias Nostrum.Api
 
@@ -79,7 +82,6 @@ defmodule Catlixir.Command.Breed do
   """
   def results_to_embeds(results, message) do
     for result <- results do
-      import Nostrum.Struct.Embed
 
       {name, result} = Map.pop(result, "name")
       {description, result} = Map.pop(result, "description")
@@ -87,30 +89,41 @@ defmodule Catlixir.Command.Breed do
 
       embed =
         Catlixir.Helper.create_empty_embed!(message)
-        |> put_title("#{name}")
+        |> put_title(name)
         |> put_description(description)
         |> put_url(wiki)
         |> put_image(get_wiki_image_url!(wiki))
 
-      permit = ["health_issues", "alt_names", "life_span"]
+      IO.inspect(result, label: "Results")
 
-      result =
-        Enum.reduce(result, embed, fn {key, value}, buffer ->
-          if !is_map(value) and !is_nil(value) and !String.equivalent?("#{value}", "") and
-               Enum.member?(permit, key) do
-            key =
-              key
-              |> String.capitalize()
-              |> String.replace("_", " ")
-
-            put_field(buffer, "#{key}", value, true)
-          else
-            buffer
-          end
-        end)
-
-      result |> put_color_on_embed(message)
+      Enum.reduce(result, embed, &enrich_embed/2)
+      |> put_color_on_embed(message)
     end
+  end
+
+  @permitable_fields ["health_issues", "alt_names", "life_span"]
+
+  @doc """
+  Enriches the embed with the fields from `key`/`value`. Only is enriched when
+  `key` is in @permitable_fields and value is not nil.
+  """
+  @spec enrich_embed({key :: String.t(), value :: any()}, embed :: Nostrum.Struct.Embed.t())
+    :: Nostrum.Struct.Embed.t()
+  def enrich_embed({_, ""}, embed) do
+    embed
+  end
+
+  def enrich_embed({key, value}, embed) when key in @permitable_fields and not is_nil(value) do
+    key =
+      key
+      |> String.capitalize()
+      |> String.replace("_", " ")
+
+    put_field(embed, "#{key}", value, true)
+  end
+
+  def enrich_embed(_, embed) do
+    embed
   end
 
   @doc """
