@@ -14,78 +14,45 @@ defmodule Catlixir.Command.Breed do
   def perform(arguments, message) do
     breed = Enum.join(arguments, " ")
 
-    if breed != "" do
-      # This part of the code is ran when the breed is specified
-      result =
-        breed
-        |> create_url()
-        |> HTTPoison.get("x-api-key": @cat_api)
+    result =
+      breed
+      |> create_url()
+      |> HTTPoison.get("x-api-key": @cat_api)
 
-      case result do
-        {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-          results =
-            body
-            |> Jason.decode!()
+    case result do
+      {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+        results = Jason.decode!(body)
 
-          if Enum.empty?(results) do
-            Api.create_message(message.channel_id, embed: create_empty_embed(message))
-          else
-            results =
-              Enum.chunk_every(results, 5)
-              |> Enum.at(0)
+        if Enum.empty?(results) do
+          Api.create_message(message.channel_id, embed: create_empty_embed(message))
+        else
+          cat_breed(breed, results)
+          |> results_to_embeds(message)
+          |> Enum.map(fn embed ->
+            Api.create_message(message.channel_id, embed: embed)
+          end)
+        end
 
-            results
-            |> results_to_embeds(message)
-            |> Enum.map(fn embed ->
-              Api.create_message(message.channel_id, embed: embed)
-            end)
-          end
+      {:ok, %HTTPoison.Response{status_code: 404}} ->
+        message.channel_id
+        |> Api.create_message(embed: create_api_error_embed!(message))
 
-        {:ok, %HTTPoison.Response{status_code: 404}} ->
-          message.channel_id
-          |> Api.create_message(embed: create_api_error_embed!(message))
-
-        {:error, _error} ->
-          message.channel_id
-          |> Api.create_message(embed: create_error_embed!(message))
-      end
-    else
-      # This part of the code will select a random breed
-      result =
-        create_url()
-        |> HTTPoison.get("x-api-key": @cat_api)
-
-      case result do
-        {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-          results =
-            body
-            |> Jason.decode!()
-
-          if Enum.empty?(results) do
-            Api.create_message(message.channel_id, embed: create_empty_embed(message))
-          else
-            result = Enum.random(results)
-
-            results_to_embeds([result], message)
-            |> Enum.map(fn embed ->
-              Api.create_message(message.channel_id, embed: embed)
-            end)
-          end
-
-        {:ok, %HTTPoison.Response{status_code: 404}} ->
-          message.channel_id
-          |> Api.create_message(embed: create_api_error_embed!(message))
-
-        {:error, _error} ->
-          message.channel_id
-          |> Api.create_message(embed: create_error_embed!(message))
-      end
+      {:error, _error} ->
+        message.channel_id
+        |> Api.create_message(embed: create_error_embed!(message))
     end
-
     :ok
   end
 
-  def create_url() do
+  def cat_breed("", results) do
+    Enum.random(results) |> List.wrap()
+  end
+
+  def cat_breed(_, results) do
+    results |> Enum.take(5)
+  end
+
+  def create_url("") do
     "https://api.thecatapi.com/v1/breeds"
   end
 
@@ -94,9 +61,7 @@ defmodule Catlixir.Command.Breed do
   Encodes and creates the needed parameter.
   """
   def create_url(breed) do
-    breed =
-      breed
-      |> URI.encode_www_form()
+    breed = URI.encode_www_form(breed)
 
     "https://api.thecatapi.com/v1/breeds/search?q=#{breed}"
   end
