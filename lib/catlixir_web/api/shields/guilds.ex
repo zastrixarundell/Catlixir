@@ -1,4 +1,3 @@
-
 defmodule CatlixirWeb.Controllers.Api.Shields.Guilds do
   use CatlixirWeb.Api.DataResponse
 

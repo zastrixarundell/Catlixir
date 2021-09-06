@@ -1,5 +1,4 @@
 defmodule Catlixir do
-
   @moduledoc """
   Module for the basic API of Catlixir.
   """
@@ -16,18 +15,18 @@ defmodule Catlixir do
   Get the amount of unique real users in all of the servers/guilds.
   """
   def get_user_count! do
-      Nostrum.Cache.GuildCache.all()
-      |> Enum.reduce([], fn guild, buffer ->
-        members =
-          guild
-          |> Map.get(:members)
-          |> Enum.filter(fn {_key, value} -> !value.user.bot end)
-          |> Enum.map(fn {key, _value} -> key end)
+    Nostrum.Cache.GuildCache.all()
+    |> Enum.reduce([], fn guild, buffer ->
+      members =
+        guild
+        |> Map.get(:members)
+        |> Enum.filter(fn {_key, value} -> !value.user.bot end)
+        |> Enum.map(fn {key, _value} -> key end)
 
-        buffer ++ members
-      end)
-      |> Enum.frequencies()
-      |> Enum.count()
+      buffer ++ members
+    end)
+    |> Enum.frequencies()
+    |> Enum.count()
   end
 
   alias Nostrum.Cache.Me
@@ -72,5 +71,4 @@ defmodule Catlixir do
     {:ok, vsn} = :application.get_key(:catlixir, :vsn)
     List.to_string(vsn)
   end
-
 end

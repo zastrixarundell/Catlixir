@@ -5,8 +5,7 @@ config :nostrum,
   num_shards: :auto
 
 # Configuration for Catlixir
-the_cat_api_key =
-  System.get_env("THE_CAT_API_KEY")
+the_cat_api_key = System.get_env("THE_CAT_API_KEY")
 
 config :catlixir,
   command: System.get_env("DISCORD_BOT_COMMAND") || ".cat",

@@ -32,22 +32,31 @@ defmodule Catlixir.Command do
     case command do
       "help" ->
         Help.perform(arguments, message)
+
       "fact" ->
         Fact.perform(arguments, message)
+
       "breed" ->
         Breed.perform(arguments, message)
+
       "random" ->
         RedditPost.perform("cat", message)
+
       "invite" ->
         Invite.perform(arguments, message)
+
       "support" ->
         Support.perform(arguments, message)
+
       "meme" ->
         RedditPost.perform("catmemes", message)
+
       "vote" ->
         Vote.perform(arguments, message)
+
       "source" ->
         Source.perform(arguments, message)
+
       _ ->
         Help.perform(arguments, message)
     end
@@ -59,5 +68,4 @@ defmodule Catlixir.Command do
   Default behavior for any discord command.
   """
   @callback perform(arguments :: list(String.t()), message :: %Nostrum.Struct.Message{}) :: :ok
-
 end

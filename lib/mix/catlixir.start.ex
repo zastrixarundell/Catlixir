@@ -7,7 +7,6 @@ defmodule Mix.Tasks.Catlixir.Start do
 
   @doc false
   def run(args) do
-    Mix.Tasks.Run.run ["--no-halt"] ++ args
+    Mix.Tasks.Run.run(["--no-halt"] ++ args)
   end
-
 end
