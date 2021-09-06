@@ -94,8 +94,6 @@ defmodule Catlixir.Command.Breed do
         |> put_url(wiki)
         |> put_image(get_wiki_image_url!(wiki))
 
-      IO.inspect(result, label: "Results")
-
       Enum.reduce(result, embed, &enrich_embed/2)
       |> put_color_on_embed(message)
     end
