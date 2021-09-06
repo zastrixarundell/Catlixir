@@ -13,21 +13,15 @@ defmodule Catlixir do
   end
 
   @doc """
-  Get the amount of unique real users in all of the servers/guilds.
+  Show the amount of unique non-bot users in the guilds the bot is in across.
   """
+  @spec get_user_count!() :: non_neg_integer()
   def get_user_count! do
-      Nostrum.Cache.GuildCache.all()
-      |> Enum.reduce([], fn guild, buffer ->
-        members =
-          guild
-          |> Map.get(:members)
-          |> Enum.filter(fn {_key, value} -> !value.user.bot end)
-          |> Enum.map(fn {key, _value} -> key end)
-
-        buffer ++ members
-      end)
-      |> Enum.frequencies()
-      |> Enum.count()
+    Nostrum.Cache.GuildCache.all()
+    |> Stream.flat_map(fn guild -> guild.members end)
+    |> Stream.reject(fn {_, member} -> member.user.bot end)
+    |> Stream.uniq_by(fn {snowflake, _} -> snowflake end)
+    |> Enum.count()
   end
 
   alias Nostrum.Cache.Me
