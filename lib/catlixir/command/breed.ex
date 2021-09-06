@@ -119,7 +119,7 @@ defmodule Catlixir.Command.Breed do
       |> String.capitalize()
       |> String.replace("_", " ")
 
-    put_field(embed, "#{key}", value, true)
+    put_field(embed, key, value, true)
   end
 
   def enrich_embed(_, embed) do
