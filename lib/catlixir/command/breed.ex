@@ -43,6 +43,12 @@ defmodule Catlixir.Command.Breed do
     :ok
   end
 
+  @doc """
+  Extract information about the cat breed. When `breed` is set
+  to `""` then it takes a random result. Otherwise it responds
+  with the first 5 results for a search query.
+  """
+  @spec cat_breed(breed :: String.t(), list()) :: list()
   def cat_breed("", results) do
     Enum.random(results) |> List.wrap()
   end
