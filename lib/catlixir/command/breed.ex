@@ -41,6 +41,7 @@ defmodule Catlixir.Command.Breed do
         message.channel_id
         |> Api.create_message(embed: create_error_embed!(message))
     end
+
     :ok
   end
 
