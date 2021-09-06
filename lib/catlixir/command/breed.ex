@@ -163,9 +163,7 @@ defmodule Catlixir.Command.Breed do
           |> Map.get("query")
           |> Map.get("pages")
 
-        if(Enum.member?(pages, -1)) do
-          nil
-        else
+        unless Enum.member?(pages, -1) do
           {_id, data} =
             pages
             |> Map.to_list()
