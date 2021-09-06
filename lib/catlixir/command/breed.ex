@@ -28,9 +28,7 @@ defmodule Catlixir.Command.Breed do
         else
           cat_breed(breed, results)
           |> results_to_embeds(message)
-          |> Enum.map(fn embed ->
-            Api.create_message(message.channel_id, embed: embed)
-          end)
+          |> Enum.each(&Api.create_message(message.channel_id, embed: &1))
         end
 
       {:ok, %HTTPoison.Response{status_code: 404}} ->
