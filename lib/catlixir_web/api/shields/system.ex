@@ -1,4 +1,3 @@
-
 defmodule CatlixirWeb.Controllers.Api.Shields.System do
   use CatlixirWeb.Api.DataResponse
 
