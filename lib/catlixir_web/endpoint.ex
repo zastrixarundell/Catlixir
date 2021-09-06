@@ -28,6 +28,10 @@ defmodule CatlixirWeb.Endpoint do
     apply(CatlixirWeb.Controllers.Api.Shields.System, :show, [conn])
   end
 
+  get "/api/shields/users" do
+    apply(CatlixirWeb.Controllers.Api.Shields.Users, :show, [conn])
+  end
+
   match _ do
     send_resp(conn, 404, "{\"error\": \"Path Undefined\"}")
   end
