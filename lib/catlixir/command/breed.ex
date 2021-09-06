@@ -19,7 +19,7 @@ defmodule Catlixir.Command.Breed do
       result =
         breed
         |> create_url()
-        |> HTTPoison.get(["x-api-key": @cat_api])
+        |> HTTPoison.get("x-api-key": @cat_api)
 
       case result do
         {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
@@ -34,11 +34,11 @@ defmodule Catlixir.Command.Breed do
               Enum.chunk_every(results, 5)
               |> Enum.at(0)
 
-              results
-              |> results_to_embeds(message)
-              |> Enum.map(fn embed ->
-                Api.create_message(message.channel_id, embed: embed)
-              end)
+            results
+            |> results_to_embeds(message)
+            |> Enum.map(fn embed ->
+              Api.create_message(message.channel_id, embed: embed)
+            end)
           end
 
         {:ok, %HTTPoison.Response{status_code: 404}} ->
@@ -50,10 +50,10 @@ defmodule Catlixir.Command.Breed do
           |> Api.create_message(embed: create_error_embed!(message))
       end
     else
-    # This part of the code will select a random breed
+      # This part of the code will select a random breed
       result =
         create_url()
-        |> HTTPoison.get(["x-api-key": @cat_api])
+        |> HTTPoison.get("x-api-key": @cat_api)
 
       case result do
         {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
@@ -85,7 +85,7 @@ defmodule Catlixir.Command.Breed do
     :ok
   end
 
-  def create_url()do
+  def create_url() do
     "https://api.thecatapi.com/v1/breeds"
   end
 
@@ -125,10 +125,9 @@ defmodule Catlixir.Command.Breed do
       permit = ["health_issues", "alt_names", "life_span"]
 
       result =
-        Enum.reduce result, embed, fn {key, value}, buffer ->
-          if !is_map(value) and !is_nil(value) and !String.equivalent?("#{value}", "")
-            and Enum.member?(permit, key) do
-
+        Enum.reduce(result, embed, fn {key, value}, buffer ->
+          if !is_map(value) and !is_nil(value) and !String.equivalent?("#{value}", "") and
+               Enum.member?(permit, key) do
             key =
               key
               |> String.capitalize()
@@ -138,7 +137,7 @@ defmodule Catlixir.Command.Breed do
           else
             buffer
           end
-        end
+        end)
 
       result |> put_color_on_embed(message)
     end
@@ -153,7 +152,9 @@ defmodule Catlixir.Command.Breed do
     Catlixir.Helper.create_empty_embed!(message)
     |> put_title("Oh noes! An error meow-curred!")
     |> put_description("I couldn't find that breed!")
-    |> put_image("https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/oh_noes.jpg")
+    |> put_image(
+      "https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/oh_noes.jpg"
+    )
   end
 
   @doc false
@@ -172,7 +173,9 @@ defmodule Catlixir.Command.Breed do
       |> String.replace("(cat)", "cat")
 
     result =
-      "https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=original&titles=#{name}"
+      "https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=original&titles=#{
+        name
+      }"
       |> HTTPoison.get()
 
     case result do
@@ -193,9 +196,9 @@ defmodule Catlixir.Command.Breed do
 
           data["original"]["source"]
         end
+
       _ ->
         nil
     end
   end
-
 end
