@@ -95,7 +95,7 @@ defmodule Catlixir.Command.RedditPost do
 
     json =
       json
-      |> Enum.to_list()
+      |> List.wrap()
       |> List.first()
       |> Map.get("data")
       |> Map.get("children")
