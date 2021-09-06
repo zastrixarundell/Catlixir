@@ -1,5 +1,4 @@
 defmodule Catlixir.Command.Breed do
-
   @moduledoc """
   Module regarding the breed discord command.
   """
@@ -82,19 +81,16 @@ defmodule Catlixir.Command.Breed do
   """
   def results_to_embeds(results, message) do
     for result <- results do
-
       {name, result} = Map.pop(result, "name")
       {description, result} = Map.pop(result, "description")
       {wiki, result} = Map.pop(result, "wikipedia_url")
 
-      embed =
-        Catlixir.Helper.create_empty_embed!(message)
-        |> put_title(name)
-        |> put_description(description)
-        |> put_url(wiki)
-        |> put_image(get_wiki_image_url!(wiki))
-
-      Enum.reduce(result, embed, &enrich_embed/2)
+      Catlixir.Helper.create_empty_embed!(message)
+      |> put_title(name)
+      |> put_description(description)
+      |> put_url(wiki)
+      |> put_image(get_wiki_image_url!(wiki))
+      |> (&Enum.reduce(result, &1, fn kv, buff -> enrich_embed(kv, buff) end)).()
       |> put_color_on_embed(message)
     end
   end
@@ -105,8 +101,8 @@ defmodule Catlixir.Command.Breed do
   Enriches the embed with the fields from `key`/`value`. Only is enriched when
   `key` is in @permitable_fields and value is not nil.
   """
-  @spec enrich_embed({key :: String.t(), value :: any()}, embed :: Nostrum.Struct.Embed.t())
-    :: Nostrum.Struct.Embed.t()
+  @spec enrich_embed({key :: String.t(), value :: any()}, embed :: Nostrum.Struct.Embed.t()) ::
+          Nostrum.Struct.Embed.t()
   def enrich_embed({_, ""}, embed) do
     embed
   end
