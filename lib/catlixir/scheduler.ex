@@ -15,5 +15,4 @@ defmodule Catlixir.Scheduler do
 
     BotStats.post_updated_data(stats: stats)
   end
-
 end

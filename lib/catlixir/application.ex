@@ -11,10 +11,10 @@ defmodule Catlixir.Application do
       Catlixir.Consumer,
       Catlixir.Scheduler,
       Plug.Cowboy.child_spec(
-          scheme: :http,
-          plug: CatlixirWeb.Endpoint,
-          options: [port: Application.get_env(:catlixir, :port) |> String.to_integer()]
-        )
+        scheme: :http,
+        plug: CatlixirWeb.Endpoint,
+        options: [port: Application.get_env(:catlixir, :port) |> String.to_integer()]
+      )
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

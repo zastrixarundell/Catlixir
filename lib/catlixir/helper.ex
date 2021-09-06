@@ -14,7 +14,6 @@ defmodule Catlixir.Helper do
 
     case guild do
       {:ok, guild} ->
-
         role_id =
           guild
           |> Map.get(:members)
@@ -35,6 +34,7 @@ defmodule Catlixir.Helper do
           embed
           |> put_color(role.color)
         end
+
       {:error, _reason} ->
         embed
     end
@@ -49,7 +49,9 @@ defmodule Catlixir.Helper do
     create_empty_embed!(message)
     |> put_title("Oh noes! The page wasn't found!")
     |> put_description("The page from where I get the facts is down! This is a cat-astrophe!")
-    |> put_image("https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/oh_noes.jpg")
+    |> put_image(
+      "https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/oh_noes.jpg"
+    )
   end
 
   @doc """
@@ -62,7 +64,9 @@ defmodule Catlixir.Helper do
     create_empty_embed!(message)
     |> put_title("Oh noes! An error meow-curred!")
     |> put_description("Something went wrong hooman!")
-    |> put_image("https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/oh_noes.jpg")
+    |> put_image(
+      "https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/oh_noes.jpg"
+    )
   end
 
   @doc """
@@ -72,5 +76,4 @@ defmodule Catlixir.Helper do
     %Nostrum.Struct.Embed{}
     |> put_color_on_embed(message)
   end
-
 end

@@ -22,8 +22,8 @@ defmodule Catlixir.Consumer do
   parse it to the command module.
   """
   def handle_event({:MESSAGE_CREATE, message, _ws_state}) do
-    if (!message.author.bot and is_catlixir_command? message), do:
-      Catlixir.Command.handle_message(message)
+    if !message.author.bot and is_catlixir_command?(message),
+      do: Catlixir.Command.handle_message(message)
   end
 
   @doc """
@@ -32,7 +32,6 @@ defmodule Catlixir.Consumer do
   def handle_event({:READY, _, _}) do
     Nostrum.Api.update_status(:online, "you type #{@command}", 3)
   end
-
 
   @doc """
   This only exists so that when an uncaptured event is
@@ -47,9 +46,9 @@ defmodule Catlixir.Consumer do
   """
   def is_catlixir_command?(message) do
     message.content
-      |> String.downcase()
-      |> String.split(" ")
-      |> Enum.at(0)
-      |> String.equivalent?(@command)
+    |> String.downcase()
+    |> String.split(" ")
+    |> Enum.at(0)
+    |> String.equivalent?(@command)
   end
 end

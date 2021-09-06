@@ -20,6 +20,8 @@ defmodule Catlixir.Command.Support do
 
     create_empty_embed!(message)
     |> put_title("Go to the support server!")
-    |> put_description("You can go to the support server by following [this](#{@support_url}) link!")
+    |> put_description(
+      "You can go to the support server by following [this](#{@support_url}) link!"
+    )
   end
 end

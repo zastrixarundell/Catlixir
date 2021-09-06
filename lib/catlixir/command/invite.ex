@@ -22,11 +22,12 @@ defmodule Catlixir.Command.Invite do
     import Nostrum.Struct.Embed
     import Catlixir.Helper
 
-    my_username =
-      Nostrum.Cache.Me.get().username
+    my_username = Nostrum.Cache.Me.get().username
 
     create_empty_embed!(message)
     |> put_title("Invite #{my_username} to your server!")
-    |> put_description("You can go to [this](#{@invite_url}) url to invite the bot to your server!")
+    |> put_description(
+      "You can go to [this](#{@invite_url}) url to invite the bot to your server!"
+    )
   end
 end

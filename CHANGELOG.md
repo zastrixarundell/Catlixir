@@ -1,5 +1,13 @@
 # Changelog
 
+# 0.2.1
+- Less space used.
+- Less if statements.
+- More guards and pattern matching.
+- More readable code.
+- More function captures.
+- Added support for asdf-vm.
+
 # 0.2.0
 - Added webserver as well.
 

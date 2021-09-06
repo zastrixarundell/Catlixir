@@ -1,5 +1,4 @@
 defmodule Catlixir do
-
   @moduledoc """
   Module for the basic API of Catlixir.
   """
@@ -66,5 +65,4 @@ defmodule Catlixir do
     {:ok, vsn} = :application.get_key(:catlixir, :vsn)
     List.to_string(vsn)
   end
-
 end
