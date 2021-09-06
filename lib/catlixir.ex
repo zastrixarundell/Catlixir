@@ -18,7 +18,7 @@ defmodule Catlixir do
   @spec get_user_count!() :: non_neg_integer()
   def get_user_count! do
     Nostrum.Cache.GuildCache.all()
-    |> Stream.flat_map(fn guild -> guild.members end)
+    |> Stream.flat_map(&(&1.members))
     |> Stream.reject(fn {_, member} -> member.user.bot end)
     |> Stream.uniq_by(fn {snowflake, _} -> snowflake end)
     |> Enum.count()
