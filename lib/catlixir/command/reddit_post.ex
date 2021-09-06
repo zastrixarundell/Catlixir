@@ -93,10 +93,10 @@ defmodule Catlixir.Command.RedditPost do
   def create_image_embed!(json, message) do
     import Nostrum.Struct.Embed
 
-    json = if is_list(json), do: List.first(json), else: json
-
     json =
       json
+      |> Enum.to_list()
+      |> List.first()
       |> Map.get("data")
       |> Map.get("children")
       |> List.first()
