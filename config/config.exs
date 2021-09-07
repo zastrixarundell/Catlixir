@@ -2,7 +2,12 @@ use Mix.Config
 
 config :nostrum,
   token: System.get_env("DISCORD_BOT_TOKEN"),
-  num_shards: :auto
+  num_shards: :auto,
+  request_guild_members: true,
+  gateway_intents: [
+    :guilds,
+    :guild_members
+  ]
 
 # Configuration for Catlixir
 the_cat_api_key = System.get_env("THE_CAT_API_KEY")
