@@ -52,8 +52,8 @@ defmodule Catlixir.Command.RedditPost do
       {:ok, %HTTPoison.Response{status_code: 302, headers: headers}} ->
         {status, embed} =
           headers
-          |> Enum.map(fn {key, value} -> {"#{key}" |> String.to_atom(), value} end)
-          |> Keyword.get(:location)
+          |> Map.new()
+          |> Map.get("location")
           |> get_data_for_location!()
           |> create_image_embed!(message)
 
@@ -75,6 +75,7 @@ defmodule Catlixir.Command.RedditPost do
   Gets the data of the redit JSON location which was specified in a header.
   """
   def get_data_for_location!(location) do
+    IO.inspect(location, label: "Location")
     case HTTPoison.get(location) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         body
