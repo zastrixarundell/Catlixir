@@ -1,5 +1,5 @@
 # Catlixir
-A discord bot written in Elixir for... Cats!
+A Discord bot written in Elixir regarding... Cats!
 
 ![Catlixir image](https://raw.githubusercontent.com/zastrixarundell/Catlixir/master/assets/catlixir_banner.png "Catlixir")
 
